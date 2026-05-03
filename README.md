@@ -34,7 +34,7 @@ For the backend, the core logic lives in a single API route (`/api/generate`). W
 *Note: This could easily be replaced with an advanced Web Search API (like Tavily or SerpApi) as a tool for the LLM. However, to keep the system simple, fast, and free of third-party search quotas, the native Wikipedia API is utilized.*
 
 ### 2. LLM Orchestration & Streaming
-The retrieved context is injected into a strict system prompt sent to the Gemini API (`gemini-1.5-flash`). The AI response is streamed back to the client progressively using **Server-Sent Events (SSE)**. 
+The retrieved context is injected into a strict system prompt sent to the Gemini API (`gemini-2.5-flash`). The AI response is streamed back to the client progressively using **Server-Sent Events (SSE)**. 
 *Note: This SSE streaming approach makes the app feel highly responsive. For future scaling into a real-time, high-performance enterprise application, this streaming layer could be upgraded to use WebSockets or gRPC.*
 
 ### 3. Real-Time UI Parsing
@@ -43,10 +43,7 @@ Instead of waiting for the full structured JSON to finish generating, the fronte
 ### 4. Strict Validation & Auto-Repair Layer
 Once the full AI response is received, it is strictly validated using **Zod schemas** to ensure the JSON structure is exactly what the frontend expects (e.g., exactly five quiz questions, exactly four options each). If the structure is slightly off, a custom validation repair layer makes a best-effort attempt to fix missing fields or incorrect lengths before throwing a fatal error.
 
-### 5. Asynchronous Resource Curation
-While the main content is being validated, a parallel asynchronous LLM call generates a curated list of learning resources (Videos, Articles, Books) so the user can continue their deep-learning journey.
-
-### 6. Frontend Design
+### 5. Frontend Design
 The frontend is built with React and **Tailwind CSS**. The design intentionally avoids heavy styling, relying instead on clean typography, responsive flex/grid layouts, subtle borders, and a dark theme. State management gracefully handles the streaming text updates, loading skeletons, error states, and `localStorage` caching for recent searches.
 
 ## Assumptions Made

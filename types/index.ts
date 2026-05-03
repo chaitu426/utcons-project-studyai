@@ -12,6 +12,7 @@ export interface KeyPoint {
 export interface Resource {
   title: string;
   description: string;
+  url: string;
   type: "Article" | "Video" | "Book" | "Course" | string;
 }
 

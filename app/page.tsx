@@ -6,7 +6,6 @@ import { SearchSources } from "@/components/SearchSources";
 import { SummarySection } from "@/components/SummarySection";
 import { KeyPointsSection } from "@/components/KeyPointsSection";
 import { QuizSection } from "@/components/QuizSection";
-import { ResourcesSection } from "@/components/ResourcesSection";
 import { RecentSearches } from "@/components/RecentSearches";
 import { ResultSkeleton } from "@/components/ResultSkeleton";
 import { ErrorState } from "@/components/ErrorState";
@@ -288,9 +287,8 @@ export default function HomePage() {
             </div>
 
 
-            <SummarySection summary={result.summary} />
+            <SummarySection summary={result.summary} resources={result.resources} />
             <KeyPointsSection keyPoints={result.keyPoints} />
-            <ResourcesSection resources={result.resources} />
             <QuizSection quiz={result.quiz} />
           </div>
         )}
